@@ -4,8 +4,8 @@ use text_io::read;
 
 use serde::{Deserialize, Serialize};
 
-const CONFIG_DIR: &str = "~/.gpt-cli";
-const CONFIG_PATH: &str = "~/.gpt-cli/config.json";
+const CONFIG_DIR: &str = concat!(env!("HOME"), "/.gpt-cli");
+const CONFIG_PATH: &str = concat!(env!("HOME"), "/.gpt-cli/config.json");
 fn create_directory() {
     fs::create_dir_all(CONFIG_DIR).expect(&format!("Cannot create directory {}", CONFIG_DIR));
 }
