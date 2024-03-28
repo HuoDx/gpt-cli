@@ -8,6 +8,7 @@ This project is written in Rust.
 ## Usage 
 
 ```shell
+gpt-cli config # configure the client
 gpt-cli chat <your api key>
 >>> Hello!
 

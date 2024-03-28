@@ -1,9 +1,12 @@
-use crate::api::OpenAI;
+use crate::{api::OpenAI, config::Config};
 use text_io::read;
-pub fn run(args: &[String]) {
-    let sys_prompt = "Behave like a plain UNIX bash; 
-    be as concise as possible! You can choose not to respond by saying '/NR'";
-    let mut api = OpenAI::new(&args[0], "gpt-4", sys_prompt);
+pub fn run(_: &[String]) {
+    let config = Config::load();
+    let sys_prompt = config.system_prompt
+    .expect("Run `gpt-cli config` to configure your settings.");
+    let model_name = config.model_name.expect("Run `gpt-cli config` to configure your settings.");
+    let api_key = config.api_key.expect("Run `gpt-cli config` to configure your settings.");
+    let mut api = OpenAI::new(&api_key, &model_name, &sys_prompt);
     println!("SYSTEM: {}\n", sys_prompt);
     print!(">>> ");
     let mut user: String = read!("{}\n");
@@ -13,7 +16,7 @@ pub fn run(args: &[String]) {
             _ => {
                 let rslt = api.chat(&user);
                 if !rslt.eq("/NR") {
-                    println!("<<< {}", rslt);
+                    println!("\n{}\n", rslt);
                 }
             }
         }
