@@ -20,3 +20,10 @@ AI: Sure thing! Let everyone know - "Rust is their absolute favorite!"
 
 >>> ::exit
 ```
+
+## Build & Install
+
+If you have Rust environment, just use `cargo install --path .` to build and 
+install it from the source code.
+
+Otherwise, you can directly use a prepared binary to run it.
